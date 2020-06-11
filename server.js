@@ -22,9 +22,18 @@ var server = http.createServer(function (request, response) {
     /******** main start ************/
 
     response.statusCode = 200
-    response.setHeader('Content-Type', 'text/html;charset=utf-8')
-    const filePath = path === '/' ? '/index.html' : path
     let content
+    // setting index
+    const filePath = path === '/' ? '/index.html' : path
+    // judge type
+    const index = filePath.lastIndexOf('.')
+    const suffix = filePath.substring(index)
+    const fileType = {
+        '.html': 'text/html',
+        '.css': 'text/css',
+        '.js': 'text/javascript'
+    }
+    response.setHeader('Content-Type', `${fileType[suffix] || text/html};charset=utf-8`)
     try {
         content = fs.readFileSync(`./public${filePath}`)
     } catch (error) {
