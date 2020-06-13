@@ -33,7 +33,7 @@ var server = http.createServer(function (request, response) {
         '.css': 'text/css',
         '.js': 'text/javascript'
     }
-    response.setHeader('Content-Type', `${fileType[suffix] || text/html};charset=utf-8`)
+    response.setHeader('Content-Type', `${fileType[suffix] || "text/html"};charset=utf-8`)
     try {
         content = fs.readFileSync(`./public${filePath}`)
     } catch (error) {
